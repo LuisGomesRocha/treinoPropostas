@@ -20,11 +20,9 @@ public class ServiceExceptionHandler {
     public ResponseEntity<StandardError> validation(DataIntegrityViolationException e, HttpServletRequest request) {
 
         List<String> msgs = new ArrayList<>();
-
         msgs.add("Esse documento já está cadastrado no banco de dados!");
-
-        StandardError err = new StandardError(HttpStatus.CONFLICT.value(), msgs, System.currentTimeMillis());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(err);
+        StandardError err = new StandardError(HttpStatus.UNPROCESSABLE_ENTITY.value(), msgs, System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
