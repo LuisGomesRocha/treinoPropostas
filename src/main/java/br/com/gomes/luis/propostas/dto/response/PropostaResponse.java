@@ -2,12 +2,6 @@ package br.com.gomes.luis.propostas.dto.response;
 
 import br.com.gomes.luis.propostas.domain.Proposta;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import java.math.BigDecimal;
-
 public class PropostaResponse {
 
     private String email;

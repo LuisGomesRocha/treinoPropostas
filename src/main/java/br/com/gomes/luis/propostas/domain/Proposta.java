@@ -34,6 +34,7 @@ public class Proposta {
     @Positive(message = "Salário deve possuir um valor positivo!")
     private BigDecimal salario;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private StatusProposta status = StatusProposta.EM_ANALISE;
 
     @Deprecated

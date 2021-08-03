@@ -7,6 +7,7 @@ import br.com.gomes.luis.propostas.dto.response.AnalisePropostaResponse;
 import br.com.gomes.luis.propostas.repository.PropostaRepository;
 import br.com.gomes.luis.propostas.service.exception.DadosImprocessaveisException;
 import br.com.gomes.luis.propostas.utils.CpfCnpjUtils;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -34,13 +35,13 @@ public class PropostaService {
 
         try{
             analisePropostaResponse = analiseClient.analisaProposta(proposta.toAnalise()).getBody();
-            proposta.setStatus(analisePropostaResponse.getStatusAnalise().toPropostaStatus());
-        } catch (DadosImprocessaveisException exception){
-            if (exception.getHttpStatus() == HttpStatus.UNPROCESSABLE_ENTITY) {
+            proposta.setStatus(StatusProposta.ELEGIVEL);
+        } catch (FeignException exception){
+            if (exception.status() == 422) {
                 proposta.setStatus(StatusProposta.NAO_ELEGIVEL);
             }
         }
-
+        propostaRepository.save(proposta);
     }
 
 
