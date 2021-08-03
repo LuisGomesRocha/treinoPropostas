@@ -53,6 +53,12 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 			<version>2.2.6.RELEASE</version>
 		</dependency>
+
+		<!--ACTUATOR-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 	</dependencies>
 
 	<repositories>
