@@ -1,5 +1,6 @@
 package br.com.gomes.luis.propostas.domain;
 
+import br.com.gomes.luis.propostas.dto.request.AnalisePropostaRequest;
 import br.com.gomes.luis.propostas.dto.response.PropostaResponse;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -32,6 +33,8 @@ public class Proposta {
     @NotNull(message = "Salário em branco!")
     @Positive(message = "Salário deve possuir um valor positivo!")
     private BigDecimal salario;
+    @NotNull
+    private StatusProposta status = StatusProposta.EM_ANALISE;
 
     @Deprecated
     public Proposta(){
@@ -87,6 +90,22 @@ public class Proposta {
 
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public StatusProposta getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusProposta status) {
+        this.status = status;
+    }
+
+    public AnalisePropostaRequest toAnalise() {
+        return new AnalisePropostaRequest(this.documento, this.nome, this.id);
     }
 
 }
