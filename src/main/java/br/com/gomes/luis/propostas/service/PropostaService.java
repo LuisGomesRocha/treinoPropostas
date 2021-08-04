@@ -35,10 +35,10 @@ public class PropostaService {
 
         try{
             analisePropostaResponse = analiseClient.analisaProposta(proposta.toAnalise()).getBody();
-            proposta.setStatus(StatusProposta.ELEGIVEL);
+            proposta.setStatusProposta(StatusProposta.ELEGIVEL);
         } catch (FeignException exception){
             if (exception.status() == 422) {
-                proposta.setStatus(StatusProposta.NAO_ELEGIVEL);
+                proposta.setStatusProposta(StatusProposta.NAO_ELEGIVEL);
             }
         }
         propostaRepository.save(proposta);

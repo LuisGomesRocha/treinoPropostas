@@ -1,6 +1,7 @@
 package br.com.gomes.luis.propostas.domain;
 
 import br.com.gomes.luis.propostas.dto.request.AnalisePropostaRequest;
+import br.com.gomes.luis.propostas.dto.request.SolicitaCartaoRequest;
 import br.com.gomes.luis.propostas.dto.response.PropostaResponse;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,22 +24,32 @@ public class Proposta {
     @NotBlank(message = "Documento em branco!")
     @Column(unique = true)
     private String documento;
-    @NotBlank (message = "Email em branco!")
+    @NotBlank(message = "Email em branco!")
     @Email(message = "email inválido")
     private String email;
-    @NotBlank (message = "Nome em branco!")
+    @NotBlank(message = "Nome em branco!")
     private String nome;
-    @NotBlank (message = "Endereço em branco!")
+    @NotBlank(message = "Endereço em branco!")
     private String endereco;
     @NotNull(message = "Salário em branco!")
     @Positive(message = "Salário deve possuir um valor positivo!")
     private BigDecimal salario;
-    @NotNull
     @Enumerated(EnumType.STRING)
-    private StatusProposta status = StatusProposta.EM_ANALISE;
+    private StatusProposta statusProposta;
+    private String numeroCartao;
 
     @Deprecated
-    public Proposta(){
+    public Proposta() {
+    }
+
+    public Proposta(String documento, String email, String nome, String endereco, BigDecimal salario, StatusProposta statusProposta, String numeroCartao) {
+        this.documento = documento;
+        this.email = email;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.salario = salario;
+        this.statusProposta = statusProposta;
+        this.numeroCartao = numeroCartao;
     }
 
     public Proposta(String documento, String email, String nome, String endereco, BigDecimal salario) {
@@ -51,6 +62,10 @@ public class Proposta {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDocumento() {
@@ -93,20 +108,28 @@ public class Proposta {
         this.salario = salario;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public StatusProposta getStatusProposta() {
+        return statusProposta;
     }
 
-    public StatusProposta getStatus() {
-        return status;
+    public String getNumeroCartao() {
+        return numeroCartao;
     }
 
-    public void setStatus(StatusProposta status) {
-        this.status = status;
+    public void setNumeroCartao(String numeroCartao) {
+        this.numeroCartao = numeroCartao;
     }
 
     public AnalisePropostaRequest toAnalise() {
         return new AnalisePropostaRequest(this.documento, this.nome, this.id);
+    }
+
+    public void setStatusProposta(StatusProposta statusProposta) {
+        this.statusProposta = statusProposta;
+    }
+
+    public SolicitaCartaoRequest toSolicitaCartao() {
+        return new SolicitaCartaoRequest(this.id);
     }
 
 }

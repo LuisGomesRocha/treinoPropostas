@@ -15,14 +15,14 @@ public class PropostaRequest {
     @NotBlank(message = "Documento em branco!")
     @Column(unique = true)
     private String documento;
-    @NotBlank (message = "Email em branco!")
-    @Email(message = "email inválido")
+    @NotBlank (message = "Email em branco")
+    @Email(message = "email invalido")
     private String email;
-    @NotBlank (message = "Nome em branco!")
+    @NotBlank (message = "Nome em branco")
     private String nome;
-    @NotBlank (message = "Endereço em branco!")
+    @NotBlank (message = "Endereço em branco")
     private String endereco;
-    @NotNull(message = "Salário em branco!")
+    @NotNull(message = "Salário em branco")
     @Positive(message = "Salário deve possuir um valor positivo!")
     private BigDecimal salario;
 
