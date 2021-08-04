@@ -1,7 +1,5 @@
 package br.com.gomes.luis.propostas.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,8 +13,6 @@ import java.util.List;
 public class Cartao {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
     @NotNull
     private LocalDateTime emitidoEm;
@@ -24,7 +20,12 @@ public class Cartao {
     private String titular;
     @NotNull
     private BigDecimal limite;
-
+    @OneToMany (mappedBy = "cartao")
+    private List<Biometria> biometrias;
+//    private List<Bloqueio> bloqueios;
+//    private List<AvisoViagem> avisos;
+//    private List<Carteira> carteiras;
+//    private List<Parcela> parcelas;
     private boolean renegociacao;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_vencimento")
@@ -46,7 +47,18 @@ public class Cartao {
         this.idProposta = idProposta;
     }
 
-    public Cartao(@NotBlank String id, @NotNull LocalDateTime emitidoEm, @NotBlank String titular, List<Bloqueio> bloqueios, List<AvisoViagem> avisos, List<Carteira> carteiras, List<Parcela> parcelas, @NotNull BigDecimal limite, @NotBlank boolean renegociacao, @NotBlank Vencimento vencimento, @NotBlank String idProposta) {
+    public Cartao(String id, LocalDateTime emitidoEm, String titular, BigDecimal limite, List<Biometria> biometrias, boolean renegociacao, Vencimento vencimento, String idProposta) {
+        this.id = id;
+        this.emitidoEm = emitidoEm;
+        this.titular = titular;
+        this.limite = limite;
+        this.biometrias = biometrias;
+        this.renegociacao = renegociacao;
+        this.vencimento = vencimento;
+        this.idProposta = idProposta;
+    }
+
+    public Cartao(String id, LocalDateTime emitidoEm, String titular, BigDecimal limite, boolean renegociacao, Vencimento vencimento, String idProposta) {
         this.id = id;
         this.emitidoEm = emitidoEm;
         this.titular = titular;

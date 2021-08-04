@@ -1,7 +1,6 @@
 package br.com.gomes.luis.propostas.dto.response;
 
 import br.com.gomes.luis.propostas.domain.*;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -25,7 +24,6 @@ public class SolicitaCartaoResponse {
     private boolean renegociacao;
     @NotBlank
     private Vencimento vencimento;
-
     @NotBlank
     private String idProposta;
 
@@ -132,6 +130,6 @@ public class SolicitaCartaoResponse {
     }
 
     public Cartao toModel() {
-        return new Cartao(this.id, this.emitidoEm,this.titular, this.bloqueios, this.avisos, this.carteiras,this.parcelas, this.limite, this.renegociacao,this.vencimento,this.idProposta);
+        return new Cartao(this.id, this.emitidoEm,this.titular, this.limite, this.renegociacao,this.vencimento,this.idProposta);
     }
 }
