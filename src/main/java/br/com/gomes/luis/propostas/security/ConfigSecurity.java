@@ -11,11 +11,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
+    public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/proposta").hasAuthority("SCOPE_proposta-scope:read")
-                .antMatchers(HttpMethod.POST, "/proposta/**").hasAuthority("SCOPE_proposta-scope:write")
+                //.antMatchers(HttpMethod.GET, "/proposta").hasAuthority("SCOPE_proposta-scope:read")
+                .antMatchers(HttpMethod.GET, "/proposta").permitAll()
+                .antMatchers(HttpMethod.POST, "/proposta/**").permitAll()
                 .anyRequest().permitAll()
                 .and().csrf().disable()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
