@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
+<<<<<<< HEAD
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.headers().frameOptions().disable();
         httpSecurity.authorizeRequests()
@@ -20,6 +21,13 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/proposta").permitAll()
                 .antMatchers(HttpMethod.POST, "/proposta/**").permitAll()
                 .antMatchers( "/h2-console/**").permitAll()
+=======
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/proposta").hasAuthority("SCOPE_proposta-scope:read")
+                .antMatchers(HttpMethod.POST, "/proposta/**").hasAuthority("SCOPE_proposta-scope:write")
+>>>>>>> parent of afa5fd9 (Deu erro bloquear cartao)
                 .anyRequest().permitAll()
                 .and().csrf().disable()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

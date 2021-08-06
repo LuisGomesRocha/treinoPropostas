@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package br.com.gomes.luis.propostas.controller;
 
 import br.com.gomes.luis.propostas.domain.Bloqueio;
@@ -55,5 +56,7 @@ public class BloqueiaCartaoController {
         BloqueioResponse bloqueioResponse = new BloqueioResponse(bloqueioCartao.getId());
         return ResponseEntity.created(uriComponentsBuilder.path("/consultaBloqueio/{idBloqueio}").buildAndExpand(bloqueioResponse.getId()).toUri()).body(bloqueioResponse);
     }
+=======
+package br.com.gomes.luis.propostas.controller;public class BloqueiaCartaoController {
+>>>>>>> parent of afa5fd9 (Deu erro bloquear cartao)
 }
-
