@@ -33,17 +33,17 @@ public class BloqueiaCartaoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> bloquearCartao(@RequestParam("idCartao") String idCartao, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> bloquearCartao(@RequestParam(name = "idCartao") String idCartao, UriComponentsBuilder uriComponentsBuilder) {
 
         Cartao cartao = entityManager.find(Cartao.class, idCartao);
-        if (cartao == null) {//1
+        if (cartao == null) {
 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cartão não encontrado.");
         }
         String ipClienteSolicitante = request.getRemoteHost();
         String userAgent = request.getHeader("User-Agent");
 
-        if (bloqueioService.isBloqueioAtivo(idCartao)){//1
+        if (bloqueioService.isBloqueioAtivo(idCartao)){
 
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Cartão já se encontra bloqueado.");
         }

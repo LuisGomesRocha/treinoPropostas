@@ -21,16 +21,16 @@ import static br.com.gomes.luis.propostas.domain.StatusProposta.ELEGIVEL;
 public class SolicitarCartao {
 
     @Autowired
-    PropostaRepository propostaRepository;//1
+    PropostaRepository propostaRepository;
 
     @Autowired
-    NovoCartaoService novoCartaoService;//1
+    NovoCartaoService novoCartaoService;
 
     @Scheduled(fixedRate = 15000)
     void guardarCartoes() {
-        List<Proposta> propostaList = buscarPropostasAptas();//1
-        if (!propostaList.isEmpty()) {//1
-            for (Proposta proposta : propostaList) {//1
+        List<Proposta> propostaList = buscarPropostasAptas();
+        if (!propostaList.isEmpty()) {
+            for (Proposta proposta : propostaList) {
                 SolicitaCartaoRequest solicitaCartaoRequest = proposta.toSolicitaCartao();//1
                 novoCartaoService.gravar(solicitaCartaoRequest);
             }
